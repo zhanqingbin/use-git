@@ -1,0 +1,85 @@
+<!DOCTYPE html><html><head><title>Git 使用</title><meta charset='utf-8'><link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'><style>
+.note-content  {font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, Song, sans-serif;}
+
+</style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h3 id="git-使用">Git 使用</h3>
+
+<ul><li><p>git clone 克隆</p>
+
+<blockquote>
+  <p>git clone 自动创建了一个名为 <strong>origin</strong> 的远端连接，指向所 fork 的仓库。</p>
+</blockquote></li>
+<li><p>git checkout -b dev 创建新分支</p></li>
+<li><p>git push -u origin dev 直接创建远程 dev 分支</p></li>
+<li><p>git branch 查看分支</p></li>
+<li><p>git branch -D dev  删除本地 dev 分支</p></li>
+<li><p>git branch -delete dev  删除本地 dev 分支</p></li>
+<li><p>git branch -r -D origin/dev 删除本地远程 dev 分支</p></li>
+<li><p>git push origin -d dev 删除远程git服务器的分支</p></li>
+<li><p>git checkout dev 切换 dev 分支</p></li>
+</ul>
+
+<h4 id="git-提交代码">git 提交代码</h4>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs maxima"><div class="hljs-line">git <span class="hljs-built_in">status</span>
+</div><div class="hljs-line">git <span class="hljs-built_in">diff</span>
+</div><div class="hljs-line">git add .
+</div><div class="hljs-line">git commit -m ''
+</div><div class="hljs-line">git pull <span class="hljs-built_in">origin</span> dev
+</div><div class="hljs-line">git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> dev
+</div></code></pre>
+
+<ul><li><p>git remote 添加远程</p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs gams"><div class="hljs-line">git remote add origin &lt;url&gt;
+</div><div class="hljs-line">git remote -v
+</div><div class="hljs-line">git remote <span class="hljs-keyword">set</span>-utl <span class="hljs-comment">&lt;url&gt;</span>
+</div><div class="hljs-line">git <span class="hljs-comment">remote add &lt;name&gt; &lt;url&gt;</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">git <span class="hljs-comment">remote -v</span>
+</div><div class="hljs-line"><span class="hljs-comment">// 打印下面的结果</span>
+</div><div class="hljs-line">origin  <span class="hljs-comment">https:</span>//<span class="hljs-comment">github.com</span>/xx/<span class="hljs-comment">xxx.git (fetch)</span>
+</div><div class="hljs-line">origin  <span class="hljs-comment">https:</span>//<span class="hljs-comment">github.com</span>/xx/<span class="hljs-comment">xxx.git (push)</span>
+</div><div class="hljs-line">upstream    <span class="hljs-comment">https:</span>//<span class="hljs-comment">github.com</span>/xx/<span class="hljs-comment">xxx.git (fetch)</span>
+</div><div class="hljs-line">upstream    <span class="hljs-comment">https:</span>//<span class="hljs-comment">github.com</span>/xx/<span class="hljs-comment">xxx.git (push)</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">// 从 original repo 获取更新，并merge到本地</span>
+</div><div class="hljs-line">git <span class="hljs-comment">fetch upstream</span>
+</div><div class="hljs-line">git <span class="hljs-comment">merge upstream</span>/<span class="hljs-number">70</span>_dev
+</div><div class="hljs-line"><span class="hljs-comment">// 下面的指令 short for 上面的2个指令</span>
+</div><div class="hljs-line">git pull upstream <span class="hljs-number">70</span>_dev
+</div></code></pre>
+
+<ul><li><p>git merge 合并分支</p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="hljs crmsh"><div class="hljs-line">git checkout dev
+</div><div class="hljs-line">git merge <span class="hljs-keyword">master</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-title">git</span> checkout dev
+</div><div class="hljs-line">git rebase <span class="hljs-literal">master</span>
+</div></code></pre>
+
+<blockquote>
+  <p>git rebase 指令冲突以后，编辑冲突的文件，然后执行： <br>
+  git add -u (-u表示把所有已track的文件的新的修改加入缓存，但不加入新的文件) <br>
+  git rebase –continue （反复执行这两行指令，直到所有的冲突解决掉。）</p>
+  
+  <p>获取远程指定分支： <br>
+  git clone -b name  url <br>
+  当前仓库太大时，就加上 –depth=数字。获取指定深度。 <br>
+  git clone –depth=6 -b name url</p>
+  
+  <p>有时候 <strong>git ignore不起作用</strong>，有可能是配置的ignore文件中忽略的文件已经被添加到git版本管理中。此时就需要清理git tracked的缓存文件。方法是： <br>
+  git rm -r –cached . (注意后面有个点，这命令作用是将所有文件都取消跟踪) <br>
+  git add . <br>
+  git commit -m ‘update git tracked files’</p>
+</blockquote></div></body></html>
